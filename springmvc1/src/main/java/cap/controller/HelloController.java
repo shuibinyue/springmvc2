@@ -1,5 +1,6 @@
 package cap.controller;
 
+import cap.bean.Admin;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -58,7 +59,21 @@ public class HelloController {
     }
 
     @RequestMapping(value = "/sayHi", method = RequestMethod.GET)
-    public String hello() {
+    public String hi() {
         return "sayHi";
     }
+
+    @RequestMapping(value = "/hello", method = RequestMethod.GET)
+    public void hello() {
+
+    }
+
+    @RequestMapping(value = "hello", method = RequestMethod.POST)
+    public ModelAndView hello(Admin admin) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("admin", admin);
+        modelAndView.setViewName("result2");
+        return modelAndView;
+    }
+
 }
