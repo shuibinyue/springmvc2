@@ -10,15 +10,23 @@ import javax.annotation.Resource;
 import java.util.List;
 
 
-@Service(value = "adminService")
+@Service
 public class AdminServiceImpl implements AdminService {
     @Resource
     private AdminDAO adminDAO;
 
+    public AdminDAO getAdminDAO() {
+        return adminDAO;
+    }
+
+    public void setAdminDAO(AdminDAO adminDAO) {
+        this.adminDAO = adminDAO;
+    }
+
     @Override
     public Admin login(Admin admin) {
 
-        return adminDAO.login(admin);
+        return adminDAO.findAdmin(admin);
     }
 
     @Override
@@ -31,6 +39,26 @@ public class AdminServiceImpl implements AdminService {
         pageBean.setList(adminList);
         pageBean.setTotalRecords(totalCount);
         return pageBean;
+    }
+
+    @Override
+    public Admin findAdmin(int id) {
+        return adminDAO.findAdmin(id);
+    }
+
+    @Override
+    public int update(int id, Admin admin) {
+        return adminDAO.update(id, admin);
+    }
+
+    @Override
+    public int delete(int id) {
+        return adminDAO.delete(id);
+    }
+
+    @Override
+    public int insert(Admin admin) {
+        return adminDAO.insert(admin);
     }
 
 }
